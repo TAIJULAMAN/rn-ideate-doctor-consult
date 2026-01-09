@@ -45,7 +45,7 @@ export default function Messages() {
                     <TouchableOpacity
                         key={message.id}
                         style={styles.messageItem}
-                        onPress={() => router.push(`/chat-detail?id=${message.id}`)}
+                        onPress={() => router.push(`/components/messaging/chat-detail?id=${message.id}` as any)}
                     >
                         <View style={styles.messageAvatarContainer}>
                             <Image source={message.doctorImage} style={styles.messageAvatar} />

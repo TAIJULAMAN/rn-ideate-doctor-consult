@@ -87,7 +87,7 @@ export default function SignIn() {
                             </View>
                             <Text style={styles.rememberText}>Remember me</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => router.push('/forgot-password')}>
+                        <TouchableOpacity onPress={() => router.push('/components/auth/forgot-password' as any)}>
                             <Text style={styles.forgotText}>Forgot Password?</Text>
                         </TouchableOpacity>
                     </View>
@@ -120,7 +120,7 @@ export default function SignIn() {
                     {/* Sign Up Link */}
                     <View style={styles.signUpContainer}>
                         <Text style={styles.signUpText}>Don't have an account? </Text>
-                        <TouchableOpacity onPress={() => router.push('/sign-up')}>
+                        <TouchableOpacity onPress={() => router.push('/components/auth/sign-up' as any)}>
                             <Text style={styles.signUpLink}>Sign Up</Text>
                         </TouchableOpacity>
                     </View>
@@ -284,3 +284,6 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
 });
+
+
+

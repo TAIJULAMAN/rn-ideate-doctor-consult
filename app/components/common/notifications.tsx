@@ -23,7 +23,7 @@ export default function Notifications() {
             message: 'Your appointment with Dr Rebbeka has been confirmed for tomorrow at 10:00 AM',
             time: '2 hours ago',
             read: false,
-            avatar: require('../assets/girls/g1.png'),
+            avatar: require('../../../assets/girls/g1.png'),
         },
         {
             id: '2',
@@ -32,7 +32,7 @@ export default function Notifications() {
             message: 'Dr Sarah sent you a message regarding your recent consultation',
             time: '5 hours ago',
             read: false,
-            avatar: require('../assets/girls/g2.png'),
+            avatar: require('../../../assets/girls/g2.png'),
         },
         {
             id: '3',
@@ -41,7 +41,7 @@ export default function Notifications() {
             message: 'Don\'t forget your appointment with Dr Emily tomorrow at 2:00 PM',
             time: '1 day ago',
             read: true,
-            avatar: require('../assets/girls/g3.png'),
+            avatar: require('../../../assets/girls/g1.png'),
         },
         {
             id: '4',
@@ -322,3 +322,5 @@ const styles = StyleSheet.create({
         height: 40,
     },
 });
+
+

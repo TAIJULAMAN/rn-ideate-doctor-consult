@@ -28,7 +28,7 @@ export default function SignUp() {
             return;
         }
         // Sign up logic
-        router.push('/otp-verification');
+        router.push('/components/auth/otp-verification' as any);
     };
 
     return (
@@ -158,9 +158,9 @@ export default function SignUp() {
                         </View>
                         <Text style={styles.termsText}>
                             I agree to the{' '}
-                            <Text style={styles.termsLink}>Terms & Conditions</Text>
+                            <Text style={styles.termsLink} onPress={() => router.push('/components/settings/terms-and-conditions' as any)}>Terms & Conditions</Text>
                             {' '}and{' '}
-                            <Text style={styles.termsLink}>Privacy Policy</Text>
+                            <Text style={styles.termsLink} onPress={() => router.push('/components/settings/privacy-policy' as any)}>Privacy Policy</Text>
                         </Text>
                     </TouchableOpacity>
 
@@ -172,7 +172,7 @@ export default function SignUp() {
                     {/* Sign In Link */}
                     <View style={styles.signInContainer}>
                         <Text style={styles.signInText}>Already have an account? </Text>
-                        <TouchableOpacity onPress={() => router.push('/sign-in')}>
+                        <TouchableOpacity onPress={() => router.push('/components/auth/sign-in' as any)}>
                             <Text style={styles.signInLink}>Sign In</Text>
                         </TouchableOpacity>
                     </View>
@@ -308,3 +308,6 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
 });
+
+
+

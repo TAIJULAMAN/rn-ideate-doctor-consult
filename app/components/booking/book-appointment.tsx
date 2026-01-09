@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { doctors } from '../data/doctors';
+import { doctors } from '../../../data/doctors';
 
 export default function BookAppointment() {
     const router = useRouter();
@@ -80,7 +80,7 @@ export default function BookAppointment() {
             return;
         }
         router.push({
-            pathname: '/checkout',
+            pathname: '/components/booking/checkout' as any,
             params: {
                 doctorId: doctor.id,
                 date: `${selectedDate} ${monthNames[selectedMonth]} ${selectedYear}`,
@@ -466,3 +466,5 @@ const styles = StyleSheet.create({
         height: 40,
     },
 });
+
+
