@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { doctors } from '../data/doctors';
+import { doctors } from '../../../data/doctors';
 
 export default function InstantService() {
     const router = useRouter();
@@ -45,11 +45,11 @@ export default function InstantService() {
     const handleStartService = () => {
         // Navigate to appropriate service
         if (selectedService === 'chat') {
-            router.push(`/chat-detail?id=${doctor.id}`);
+            router.push(`/components/messaging/chat-detail?id=${doctor.id}` as any);
         } else if (selectedService === 'voice') {
-            router.push(`/audio-call?id=${doctor.id}`);
+            router.push(`/components/messaging/audio-call?id=${doctor.id}` as any);
         } else {
-            router.push(`/video-call?id=${doctor.id}`);
+            router.push(`/components/messaging/video-call?id=${doctor.id}` as any);
         }
     };
 
@@ -434,3 +434,5 @@ const styles = StyleSheet.create({
         height: 40,
     },
 });
+
+

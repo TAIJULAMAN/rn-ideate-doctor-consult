@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { doctors } from '../data/doctors';
+import { doctors } from '../../../data/doctors';
 
 export default function SavedDoctors() {
     const router = useRouter();
@@ -49,7 +49,7 @@ export default function SavedDoctors() {
                             <View key={doctor.id} style={styles.doctorCard}>
                                 <TouchableOpacity
                                     style={styles.doctorCardContent}
-                                    onPress={() => router.push(`/doctor-detail?id=${doctor.id}`)}
+                                    onPress={() => router.push(`/components/services/doctor-detail?id=${doctor.id}` as any)}
                                 >
                                     <Image source={doctor.image} style={styles.doctorAvatar} />
                                     <View style={styles.doctorInfo}>
@@ -83,7 +83,7 @@ export default function SavedDoctors() {
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                         style={styles.bookButton}
-                                        onPress={() => router.push(`/book-appointment?id=${doctor.id}`)}
+                                        onPress={() => router.push(`/components/booking/book-appointment?id=${doctor.id}` as any)}
                                     >
                                         <Text style={styles.bookButtonText}>Book Now</Text>
                                     </TouchableOpacity>
@@ -274,3 +274,5 @@ const styles = StyleSheet.create({
         height: 40,
     },
 });
+
+

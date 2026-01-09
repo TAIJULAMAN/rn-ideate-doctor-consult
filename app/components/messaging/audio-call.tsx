@@ -19,7 +19,7 @@ export default function AudioCall() {
                 <View style={styles.avatarContainer}>
                     <View style={styles.avatarRing}>
                         <Image
-                            source={require('../assets/message/m2.png')}
+                            source={require('../../../assets/message/m2.png')}
                             style={styles.avatar}
                             resizeMode="cover"
                         />
@@ -44,7 +44,7 @@ export default function AudioCall() {
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.actionButton} onPress={() => router.push('/video-call')}>
+                <TouchableOpacity style={styles.actionButton} onPress={() => router.push('/components/messaging/video-call' as any)}>
                     <View style={[styles.actionButtonCircle, styles.videoButton]}>
                         <Ionicons name="videocam" size={24} color="#4A90E2" />
                     </View>
@@ -127,3 +127,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#E3F2FD',
     },
 });
+
+
+

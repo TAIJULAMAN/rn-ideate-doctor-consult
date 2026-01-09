@@ -13,7 +13,7 @@ export default function ForgotPassword() {
             return;
         }
         // Send OTP logic
-        router.push(`/otp-verification?email=${email}&type=reset`);
+        router.push(`/components/auth/otp-verification?email=${email}&type=reset` as any);
     };
 
     return (
@@ -70,7 +70,7 @@ export default function ForgotPassword() {
                     {/* Back to Sign In */}
                     <View style={styles.backToSignInContainer}>
                         <Ionicons name="arrow-back-outline" size={16} color="#718096" />
-                        <TouchableOpacity onPress={() => router.push('/sign-in')}>
+                        <TouchableOpacity onPress={() => router.push('/components/auth/sign-in' as any)}>
                             <Text style={styles.backToSignInText}>Back to Sign In</Text>
                         </TouchableOpacity>
                     </View>
@@ -178,3 +178,6 @@ const styles = StyleSheet.create({
         fontWeight: '500',
     },
 });
+
+
+
