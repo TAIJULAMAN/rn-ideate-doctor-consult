@@ -151,9 +151,6 @@ export default function Home() {
                         >
                             <Image source={article.image} style={styles.articleImage} />
                             <View style={styles.articleContent}>
-                                <View style={styles.articleCategory}>
-                                    <Text style={styles.articleCategoryText}>{article.category}</Text>
-                                </View>
                                 <Text style={styles.articleTitle} numberOfLines={2}>
                                     {article.title}
                                 </Text>
@@ -403,19 +400,6 @@ const styles = StyleSheet.create({
     },
     articleContent: {
         padding: 16,
-    },
-    articleCategory: {
-        alignSelf: 'flex-start',
-        backgroundColor: '#FFF5F0',
-        paddingHorizontal: 12,
-        paddingVertical: 4,
-        borderRadius: 12,
-        marginBottom: 8,
-    },
-    articleCategoryText: {
-        fontSize: 11,
-        fontWeight: '600',
-        color: '#FF8C42',
     },
     articleTitle: {
         fontSize: 15,
