@@ -29,7 +29,7 @@ export default function Onboarding2() {
                 </Text>
                 <View style={styles.imageContainer}>
                     <Image
-                        source={require('../assets/girls/g2.png')}
+                        source={require('../../../assets/girls/g2.png')}
                         style={styles.doctorImage}
                         resizeMode="contain"
                     />
@@ -107,3 +107,5 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
     },
 });
+
+

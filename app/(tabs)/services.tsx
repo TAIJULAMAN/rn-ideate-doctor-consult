@@ -27,7 +27,7 @@ export default function Services() {
                         <TouchableOpacity
                             key={category.id}
                             style={styles.categoryCard}
-                            onPress={() => router.push(`/category-doctors?id=${category.id}&name=${category.name}`)}
+                            onPress={() => router.push(`/components/services/category-doctors?id=${category.id}&name=${category.name}` as any)}
                         >
                             <View style={styles.categoryIconContainer}>
                                 <Image source={category.icon} style={styles.categoryIcon} resizeMode="contain" />
@@ -54,7 +54,7 @@ export default function Services() {
                     <TouchableOpacity
                         key={doctor.id}
                         style={styles.doctorCard}
-                        onPress={() => router.push(`/doctor-detail?id=${doctor.id}`)}
+                        onPress={() => router.push(`/components/services/doctor-detail?id=${doctor.id}` as any)}
                     >
                         <Image source={doctor.image} style={styles.doctorAvatar} />
                         <View style={styles.doctorInfo}>
