@@ -32,7 +32,7 @@ export default function ResetPassword() {
         }
         // Reset password logic
         alert('Password reset successfully!');
-        router.push('/sign-in');
+        router.push('/components/auth/sign-in' as any);
     };
 
     return (
@@ -255,3 +255,6 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
     },
 });
+
+
+
