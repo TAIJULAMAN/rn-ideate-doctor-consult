@@ -23,7 +23,10 @@ export default function Home() {
                         <Text style={styles.greeting}>Welcome Back! 👋</Text>
                         <Text style={styles.subtitle}>Find your doctor and get consultation</Text>
                     </View>
-                    <TouchableOpacity style={styles.notificationButton}>
+                    <TouchableOpacity
+                        style={styles.notificationButton}
+                        onPress={() => router.push('/notifications')}
+                    >
                         <Ionicons name="notifications-outline" size={24} color="#2D3748" />
                         <View style={styles.notificationBadge} />
                     </TouchableOpacity>

@@ -96,8 +96,8 @@ export default function Settings() {
     const handleLogout = () => {
         // Show confirmation dialog
         if (confirm('Are you sure you want to logout?')) {
-            // Navigate to login/onboarding
-            router.push('/');
+            // Navigate to sign-in
+            router.push('/components/auth/sign-in' as any);
         }
     };
 
@@ -112,7 +112,7 @@ export default function Settings() {
                 {/* Profile Card */}
                 <TouchableOpacity
                     style={styles.profileCard}
-                    onPress={() => router.push('/edit-profile')}
+                    onPress={() => router.push('/components/settings/edit-profile' as any)}
                 >
                     <Image source={user.avatar} style={styles.avatar} />
                     <View style={styles.profileInfo}>
@@ -134,7 +134,7 @@ export default function Settings() {
                                         styles.menuItem,
                                         itemIndex === section.items.length - 1 && styles.menuItemLast,
                                     ]}
-                                    onPress={() => item.route && router.push(item.route)}
+                                    onPress={() => item.route && router.push(item.route as any)}
                                 >
                                     <View style={styles.menuItemLeft}>
                                         <View style={[styles.menuIconContainer, { backgroundColor: `${item.color}15` }]}>
