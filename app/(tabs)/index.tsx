@@ -25,7 +25,7 @@ export default function Home() {
                     </View>
                     <TouchableOpacity
                         style={styles.notificationButton}
-                        onPress={() => router.push('/notifications')}
+                        onPress={() => router.push('/components/common/notifications' as any)}
                     >
                         <Ionicons name="notifications-outline" size={24} color="#2D3748" />
                         <View style={styles.notificationBadge} />
@@ -35,7 +35,7 @@ export default function Home() {
                 {/* Search Bar */}
                 <TouchableOpacity
                     style={styles.searchBar}
-                    onPress={() => router.push('/search-articles')}
+                    onPress={() => router.push('/components/articles/search-articles' as any)}
                 >
                     <Ionicons name="search" size={20} color="#718096" />
                     <Text style={styles.searchPlaceholder}>Search doctors, services...</Text>
@@ -84,7 +84,7 @@ export default function Home() {
                         <TouchableOpacity
                             key={service.id}
                             style={styles.serviceCard}
-                            onPress={() => router.push(`/category-doctors?id=${service.id}&name=${service.name}`)}
+                            onPress={() => router.push(`/components/services/category-doctors?id=${service.id}&name=${service.name}` as any)}
                         >
                             <View style={styles.serviceIconContainer}>
                                 <Image source={service.icon} style={styles.serviceIcon} resizeMode="contain" />
@@ -107,7 +107,7 @@ export default function Home() {
                     <TouchableOpacity
                         key={doctor.id}
                         style={styles.doctorCard}
-                        onPress={() => router.push(`/doctor-detail?id=${doctor.id}`)}
+                        onPress={() => router.push(`/components/services/doctor-detail?id=${doctor.id}` as any)}
                     >
                         <Image source={doctor.image} style={styles.doctorAvatar} />
                         <View style={styles.doctorInfo}>
@@ -150,7 +150,7 @@ export default function Home() {
                         <TouchableOpacity
                             key={article.id}
                             style={styles.articleCard}
-                            onPress={() => router.push(`/article-detail?id=${article.id}`)}
+                            onPress={() => router.push(`/components/articles/article-detail?id=${article.id}` as any)}
                         >
                             <Image source={article.image} style={styles.articleImage} />
                             <View style={styles.articleContent}>
