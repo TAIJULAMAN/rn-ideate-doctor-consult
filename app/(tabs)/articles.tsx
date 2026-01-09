@@ -8,7 +8,7 @@ export default function Articles() {
     const router = useRouter();
 
     const handleArticlePress = (articleId: string) => {
-        router.push(`/article-detail?id=${articleId}`);
+        router.push(`/components/articles/article-detail?id=${articleId}` as any);
     };
 
     return (
@@ -21,7 +21,7 @@ export default function Articles() {
                 <Text style={styles.headerTitle}>Articles</Text>
                 <TouchableOpacity
                     style={styles.searchButton}
-                    onPress={() => router.push('/search-articles')}
+                    onPress={() => router.push('/components/articles/search-articles' as any)}
                 >
                     <Ionicons name="search" size={24} color="#2D3748" />
                 </TouchableOpacity>

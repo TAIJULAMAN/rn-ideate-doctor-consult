@@ -9,7 +9,7 @@ export default function Onboarding1() {
     const router = useRouter();
 
     const handleGetStarted = () => {
-        router.push('/onboarding2');
+        router.push('/components/onboarding/onboarding2' as any);
     };
 
     const handleSkip = () => {
@@ -33,7 +33,7 @@ export default function Onboarding1() {
                 {/* Doctor Image */}
                 <View style={styles.imageContainer}>
                     <Image
-                        source={require('../assets/girls/g1.png')}
+                        source={require('../../../assets/girls/g1.png')}
                         style={styles.doctorImage}
                         resizeMode="contain"
                     />
@@ -111,3 +111,5 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
     },
 });
+
+
