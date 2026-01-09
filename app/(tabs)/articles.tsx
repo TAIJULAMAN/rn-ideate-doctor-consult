@@ -18,8 +18,11 @@ export default function Articles() {
                 <TouchableOpacity style={styles.backButton}>
                     <Ionicons name="arrow-back" size={24} color="#2D3748" />
                 </TouchableOpacity>
-                <Text style={styles.headerTitle}>Top Articles</Text>
-                <TouchableOpacity style={styles.searchButton}>
+                <Text style={styles.headerTitle}>Articles</Text>
+                <TouchableOpacity
+                    style={styles.searchButton}
+                    onPress={() => router.push('/search-articles')}
+                >
                     <Ionicons name="search" size={24} color="#2D3748" />
                 </TouchableOpacity>
             </View>
