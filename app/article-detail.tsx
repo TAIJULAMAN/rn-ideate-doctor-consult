@@ -74,6 +74,89 @@ export default function ArticleDetail() {
                     <Text style={styles.contentText}>{article.content}</Text>
                 </View>
 
+                {/* Comments Section */}
+                <View style={styles.commentsSection}>
+                    <Text style={styles.commentsTitle}>Comments ({article.comments})</Text>
+
+                    {/* Comment 1 */}
+                    <View style={styles.commentItem}>
+                        <View style={styles.commentAvatar}>
+                            <Ionicons name="person" size={18} color="#718096" />
+                        </View>
+                        <View style={styles.commentContent}>
+                            <View style={styles.commentHeader}>
+                                <Text style={styles.commentAuthor}>Sarah Johnson</Text>
+                                <Text style={styles.commentTime}>2h ago</Text>
+                            </View>
+                            <Text style={styles.commentText}>
+                                This is such an insightful article! I've been trying to improve my memory and these tips are really practical. Thank you for sharing! 🙏
+                            </Text>
+                            <View style={styles.commentActions}>
+                                <TouchableOpacity style={styles.commentAction}>
+                                    <Ionicons name="heart" size={16} color="#FF8C42" />
+                                    <Text style={styles.commentActionText}>24</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.commentAction}>
+                                    <Ionicons name="chatbubble-outline" size={16} color="#718096" />
+                                    <Text style={styles.commentActionText}>Reply</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+
+                    {/* Comment 2 */}
+                    <View style={styles.commentItem}>
+                        <View style={styles.commentAvatar}>
+                            <Ionicons name="person" size={18} color="#718096" />
+                        </View>
+                        <View style={styles.commentContent}>
+                            <View style={styles.commentHeader}>
+                                <Text style={styles.commentAuthor}>Michael Chen</Text>
+                                <Text style={styles.commentTime}>5h ago</Text>
+                            </View>
+                            <Text style={styles.commentText}>
+                                Great read! I've started implementing these hobbies and already seeing improvements. 💪
+                            </Text>
+                            <View style={styles.commentActions}>
+                                <TouchableOpacity style={styles.commentAction}>
+                                    <Ionicons name="heart-outline" size={16} color="#718096" />
+                                    <Text style={styles.commentActionText}>12</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.commentAction}>
+                                    <Ionicons name="chatbubble-outline" size={16} color="#718096" />
+                                    <Text style={styles.commentActionText}>Reply</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+
+                    {/* Comment 3 */}
+                    <View style={styles.commentItem}>
+                        <View style={styles.commentAvatar}>
+                            <Ionicons name="person" size={18} color="#718096" />
+                        </View>
+                        <View style={styles.commentContent}>
+                            <View style={styles.commentHeader}>
+                                <Text style={styles.commentAuthor}>Emily Rodriguez</Text>
+                                <Text style={styles.commentTime}>1d ago</Text>
+                            </View>
+                            <Text style={styles.commentText}>
+                                Would love to see more articles like this. Very informative and well-written! ✨
+                            </Text>
+                            <View style={styles.commentActions}>
+                                <TouchableOpacity style={styles.commentAction}>
+                                    <Ionicons name="heart" size={16} color="#FF8C42" />
+                                    <Text style={styles.commentActionText}>18</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.commentAction}>
+                                    <Ionicons name="chatbubble-outline" size={16} color="#718096" />
+                                    <Text style={styles.commentActionText}>Reply</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+
                 {/* Bottom Spacing */}
                 <View style={{ height: 100 }} />
             </ScrollView>
@@ -186,6 +269,70 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#2D3748',
         lineHeight: 26,
+    },
+    commentsSection: {
+        paddingHorizontal: 20,
+        paddingTop: 24,
+        paddingBottom: 16,
+        borderTopWidth: 1,
+        borderTopColor: '#E2E8F0',
+        marginTop: 24,
+    },
+    commentsTitle: {
+        fontSize: 18,
+        fontWeight: '600',
+        color: '#2D3748',
+        marginBottom: 20,
+    },
+    commentItem: {
+        flexDirection: 'row',
+        marginBottom: 20,
+        gap: 12,
+    },
+    commentAvatar: {
+        width: 36,
+        height: 36,
+        borderRadius: 18,
+        backgroundColor: '#E2E8F0',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    commentContent: {
+        flex: 1,
+    },
+    commentHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 6,
+    },
+    commentAuthor: {
+        fontSize: 14,
+        fontWeight: '600',
+        color: '#2D3748',
+    },
+    commentTime: {
+        fontSize: 12,
+        color: '#A0AEC0',
+    },
+    commentText: {
+        fontSize: 14,
+        color: '#4A5568',
+        lineHeight: 20,
+        marginBottom: 8,
+    },
+    commentActions: {
+        flexDirection: 'row',
+        gap: 16,
+    },
+    commentAction: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 4,
+    },
+    commentActionText: {
+        fontSize: 13,
+        color: '#718096',
     },
     commentBar: {
         flexDirection: 'row',
