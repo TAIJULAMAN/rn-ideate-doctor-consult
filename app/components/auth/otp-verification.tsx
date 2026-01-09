@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView, NativeSyntheticEvent, TextInputKeyPressEventData, ActivityIndicator } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -8,6 +8,7 @@ export default function OTPVerification() {
     const { email, type } = useLocalSearchParams();
     const [otp, setOtp] = useState(['', '', '', '', '', '']);
     const [timer, setTimer] = useState(60);
+    const [isLoading, setIsLoading] = useState(false);
     const inputRefs = useRef<(TextInput | null)[]>([]);
 
     useEffect(() => {
@@ -18,43 +19,50 @@ export default function OTPVerification() {
     }, []);
 
     const handleOtpChange = (value: string, index: number) => {
-        if (value.length > 1) return;
+        if (value.length > 1) {
+            value = value[value.length - 1];
+        }
 
         const newOtp = [...otp];
         newOtp[index] = value;
         setOtp(newOtp);
 
-        // Auto-focus next input
         if (value && index < 5) {
             inputRefs.current[index + 1]?.focus();
         }
     };
 
-    const handleKeyPress = (e: any, index: number) => {
+    const handleKeyPress = (e: NativeSyntheticEvent<TextInputKeyPressEventData>, index: number) => {
         if (e.nativeEvent.key === 'Backspace' && !otp[index] && index > 0) {
             inputRefs.current[index - 1]?.focus();
         }
     };
 
-    const handleVerify = () => {
+    const handleVerify = async () => {
         const otpCode = otp.join('');
         if (otpCode.length !== 6) {
             alert('Please enter complete OTP');
             return;
         }
-        // Verify OTP logic
-        if (type === 'reset') {
-            router.push('/components/auth/reset-password' as any);
-        } else {
-            router.replace('/(tabs)');
-        }
+
+        setIsLoading(true);
+
+        // Simulate API call
+        setTimeout(() => {
+            setIsLoading(false);
+            if (type === 'reset') {
+                router.push('/components/auth/reset-password' as any);
+            } else {
+                router.replace('/(tabs)');
+            }
+        }, 1500);
     };
 
     const handleResend = () => {
         if (timer === 0) {
             setTimer(60);
             setOtp(['', '', '', '', '', '']);
-            // Resend OTP logic
+            // Resend OTP logic would go here
             alert('OTP sent successfully!');
         }
     };
@@ -67,7 +75,12 @@ export default function OTPVerification() {
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
                 {/* Header */}
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+                    <TouchableOpacity
+                        style={styles.backButton}
+                        onPress={() => router.back()}
+                        accessibilityLabel="Go back"
+                        accessibilityRole="button"
+                    >
                         <Ionicons name="arrow-back" size={24} color="#2D3748" />
                     </TouchableOpacity>
                 </View>
@@ -94,13 +107,15 @@ export default function OTPVerification() {
                         <TextInput
                             key={index}
                             ref={(ref) => { inputRefs.current[index] = ref; }}
-                            style={[styles.otpInput, digit && styles.otpInputFilled]}
+                            style={[styles.otpInput, digit ? styles.otpInputFilled : null]}
                             value={digit}
                             onChangeText={(value) => handleOtpChange(value, index)}
                             onKeyPress={(e) => handleKeyPress(e, index)}
                             keyboardType="number-pad"
                             maxLength={1}
                             selectTextOnFocus
+                            accessibilityLabel={`Digit ${index + 1}`}
+                            accessibilityRole="keyboardkey"
                         />
                     ))}
                 </View>
@@ -115,15 +130,25 @@ export default function OTPVerification() {
                             </Text>
                         </Text>
                     ) : (
-                        <TouchableOpacity onPress={handleResend}>
+                        <TouchableOpacity onPress={handleResend} accessibilityRole="button" accessibilityLabel="Resend OTP">
                             <Text style={styles.resendText}>Didn't receive code? Resend</Text>
                         </TouchableOpacity>
                     )}
                 </View>
 
                 {/* Verify Button */}
-                <TouchableOpacity style={styles.verifyButton} onPress={handleVerify}>
-                    <Text style={styles.verifyButtonText}>Verify & Continue</Text>
+                <TouchableOpacity
+                    style={[styles.verifyButton, isLoading && styles.verifyButtonDisabled]}
+                    onPress={handleVerify}
+                    disabled={isLoading}
+                    accessibilityRole="button"
+                    accessibilityLabel="Verify OTP"
+                >
+                    {isLoading ? (
+                        <ActivityIndicator color="#FFFFFF" />
+                    ) : (
+                        <Text style={styles.verifyButtonText}>Verify & Continue</Text>
+                    )}
                 </TouchableOpacity>
             </ScrollView>
         </KeyboardAvoidingView>
@@ -186,7 +211,7 @@ const styles = StyleSheet.create({
         gap: 8,
     },
     otpInput: {
-        flex: 1,
+        width: 45,
         height: 56,
         borderRadius: 12,
         backgroundColor: '#FFFFFF',
@@ -223,6 +248,12 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
         borderRadius: 12,
         alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        height: 56,
+    },
+    verifyButtonDisabled: {
+        opacity: 0.7,
     },
     verifyButtonText: {
         fontSize: 16,
@@ -230,3 +261,6 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
     },
 });
+
+
+
