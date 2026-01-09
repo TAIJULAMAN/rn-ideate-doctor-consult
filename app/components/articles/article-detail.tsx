@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { articles } from '../data/articles';
+import { articles } from '../../../data/articles';
 
 export default function ArticleDetail() {
     const router = useRouter();
@@ -362,3 +362,5 @@ const styles = StyleSheet.create({
         padding: 4,
     },
 });
+
+

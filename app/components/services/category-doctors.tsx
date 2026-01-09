@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { doctors } from '../data/doctors';
-import { serviceCategories } from '../data/services';
+import { doctors } from '../../../data/doctors';
+import { serviceCategories } from '../../../data/services';
 
 export default function CategoryDoctors() {
     const router = useRouter();
@@ -42,7 +42,7 @@ export default function CategoryDoctors() {
                         <TouchableOpacity
                             key={doctor.id}
                             style={styles.doctorCard}
-                            onPress={() => router.push(`/doctor-detail?id=${doctor.id}`)}
+                            onPress={() => router.push(`/components/services/doctor-detail?id=${doctor.id}` as any)}
                         >
                             <Image source={doctor.image} style={styles.doctorAvatar} />
                             <View style={styles.doctorInfo}>
@@ -186,3 +186,5 @@ const styles = StyleSheet.create({
         lineHeight: 20,
     },
 });
+
+

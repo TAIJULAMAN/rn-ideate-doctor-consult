@@ -10,7 +10,7 @@ export default function VideoCall() {
         <View style={styles.container}>
             {/* Main Video Feed */}
             <Image
-                source={require('../assets/message/m2.png')}
+                source={require('../../../assets/message/m2.png')}
                 style={styles.mainVideo}
                 resizeMode="cover"
             />
@@ -23,7 +23,7 @@ export default function VideoCall() {
             {/* Small Video Preview (User) */}
             <View style={styles.previewContainer}>
                 <Image
-                    source={require('../assets/message/m1.png')}
+                    source={require('../../../assets/message/m1.png')}
                     style={styles.previewVideo}
                     resizeMode="cover"
                 />
@@ -119,3 +119,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#E3F2FD',
     },
 });
+
+
+

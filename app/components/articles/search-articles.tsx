@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, TextInput } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { articles } from '../data/articles';
+import { articles } from '../../../data/articles';
 
 export default function SearchArticles() {
     const router = useRouter();
@@ -40,7 +40,7 @@ export default function SearchArticles() {
             <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
                 {searchQuery.length === 0 ? (
                     <View style={styles.emptyState}>
-                        <Image source={require('../assets/search/s1.png')} style={styles.emptyImage} resizeMode="contain" />
+                        <Image source={require('../../../assets/search/s1.png')} style={styles.emptyImage} resizeMode="contain" />
                         <Text style={styles.emptyTitle}>Search Articles</Text>
                         <Text style={styles.emptyText}>
                             Find articles by title, author, or keywords
@@ -63,7 +63,7 @@ export default function SearchArticles() {
                             <TouchableOpacity
                                 key={article.id}
                                 style={styles.articleCard}
-                                onPress={() => router.push(`/article-detail?id=${article.id}`)}
+                                onPress={() => router.push(`/components/articles/article-detail?id=${article.id}` as any)}
                             >
                                 <View style={styles.cardContent}>
                                     <View style={styles.textContent}>
@@ -209,3 +209,5 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
 });
+
+

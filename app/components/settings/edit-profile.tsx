@@ -32,7 +32,7 @@ export default function EditProfile() {
                 {/* Profile Photo */}
                 <View style={styles.photoSection}>
                     <Image
-                        source={require('../assets/girls/g1.png')}
+                        source={require('../../../assets/girls/g1.png')}
                         style={styles.profilePhoto}
                     />
                     <TouchableOpacity style={styles.changePhotoButton}>
@@ -274,3 +274,5 @@ const styles = StyleSheet.create({
         height: 40,
     },
 });
+
+
