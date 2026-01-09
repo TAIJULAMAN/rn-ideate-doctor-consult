@@ -13,7 +13,7 @@ export default function Onboarding1() {
     };
 
     const handleSkip = () => {
-        router.push('/home');
+        router.push('/(tabs)');
     };
 
     return (

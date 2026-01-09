@@ -8,10 +8,10 @@ const { width, height } = Dimensions.get('window');
 export default function Onboarding2() {
     const router = useRouter();
     const handleGetStarted = () => {
-        router.push('/home');
+        router.push('/(tabs)');
     };
     const handleSkip = () => {
-        router.push('/home');
+        router.push('/(tabs)');
     };
 
     return (
