@@ -102,74 +102,60 @@ export default function DoctorDetail() {
 
                     {viewMode === 'booking' ? (
                         <>
-                            <View style={styles.calendarSection}>
-                                <View style={styles.calendarHeader}>
-                                    <TouchableOpacity>
-                                        <Ionicons name="chevron-back" size={24} color="#2D3748" />
-                                    </TouchableOpacity>
-                                    <Text style={styles.calendarMonth}>November 2020</Text>
-                                    <TouchableOpacity>
-                                        <Ionicons name="chevron-forward" size={24} color="#2D3748" />
-                                    </TouchableOpacity>
+                            <View style={styles.statsSection}>
+                                <View style={styles.statCard}>
+                                    <Ionicons name="people" size={28} color="#FF8C42" />
+                                    <Text style={styles.statNumber}>{doctor.reviewsCount}+</Text>
+                                    <Text style={styles.statLabel}>Patients</Text>
                                 </View>
-
-                                <View style={styles.weekDaysContainer}>
-                                    {weekDays.map((day, index) => (
-                                        <Text
-                                            key={index}
-                                            style={[
-                                                styles.weekDay,
-                                                index === 6 && styles.weekDaySaturday,
-                                            ]}
-                                        >
-                                            {day}
-                                        </Text>
-                                    ))}
+                                <View style={styles.statCard}>
+                                    <Ionicons name="star" size={28} color="#FF8C42" />
+                                    <Text style={styles.statNumber}>{doctor.rating}</Text>
+                                    <Text style={styles.statLabel}>Rating</Text>
                                 </View>
-
-                                <View style={styles.datesContainer}>
-                                    {dates.map((date, index) => (
-                                        <TouchableOpacity
-                                            key={index}
-                                            style={[
-                                                styles.dateButton,
-                                                selectedDate === date.day && styles.dateButtonSelected,
-                                            ]}
-                                            onPress={() => setSelectedDate(date.day)}
-                                        >
-                                            <Text
-                                                style={[
-                                                    styles.dateText,
-                                                    selectedDate === date.day && styles.dateTextSelected,
-                                                ]}
-                                            >
-                                                {date.day}
-                                            </Text>
-                                        </TouchableOpacity>
-                                    ))}
+                                <View style={styles.statCard}>
+                                    <Ionicons name="briefcase" size={28} color="#FF8C42" />
+                                    <Text style={styles.statNumber}>{doctor.yearsExperience}</Text>
+                                    <Text style={styles.statLabel}>Years Exp.</Text>
                                 </View>
                             </View>
 
-                            <View style={styles.timeSlotsContainer}>
-                                {timeSlots.map((time, index) => (
-                                    <TouchableOpacity
-                                        key={index}
-                                        style={[
-                                            styles.timeSlot,
-                                            selectedTime === time && styles.timeSlotSelected,
-                                        ]}
-                                        onPress={() => setSelectedTime(time)}
-                                    >
-                                        <Text
-                                            style={[
-                                                styles.timeSlotText,
-                                                selectedTime === time && styles.timeSlotTextSelected,
-                                            ]}
-                                        >
-                                            {time}
-                                        </Text>
-                                    </TouchableOpacity>
-                                ))}
+                            <View style={styles.reviewsSection}>
+                                <Text style={styles.reviewsTitle}>Patient Reviews</Text>
+                                <View style={styles.reviewsSummary}>
+                                    <View style={styles.ratingRow}>
+                                        <View style={styles.starsRow}>
+                                            {[1, 2, 3, 4, 5].map((star) => (
+                                                <Ionicons
+                                                    key={star}
+                                                    name={star <= Math.floor(doctor.rating) ? 'star' : 'star-outline'}
+                                                    size={20}
+                                                    color="#FF8C42"
+                                                />
+                                            ))}
+                                        </View>
+                                        <Text style={styles.ratingText}>{doctor.rating} out of 5</Text>
+                                    </View>
+                                    <Text style={styles.reviewsCount}>{doctor.reviewsCount} verified reviews</Text>
+                                </View>
+                            </View>
+
+                            <View style={styles.consultationInfo}>
+                                <View style={styles.infoRow}>
+                                    <Ionicons name="cash-outline" size={20} color="#718096" />
+                                    <Text style={styles.infoLabel}>Consultation Fee</Text>
+                                    <Text style={styles.infoValue}>${doctor.serviceCharge}/hour</Text>
+                                </View>
+                                <View style={styles.infoRow}>
+                                    <Ionicons name="time-outline" size={20} color="#718096" />
+                                    <Text style={styles.infoLabel}>Available Hours</Text>
+                                    <Text style={styles.infoValue}>9 AM - 8 PM</Text>
+                                </View>
+                                <View style={styles.infoRow}>
+                                    <Ionicons name="videocam-outline" size={20} color="#718096" />
+                                    <Text style={styles.infoLabel}>Consultation Type</Text>
+                                    <Text style={styles.infoValue}>Video/Voice/Chat</Text>
+                                </View>
                             </View>
 
                             <TouchableOpacity
@@ -195,7 +181,7 @@ export default function DoctorDetail() {
 
                             <TouchableOpacity
                                 style={styles.bookButton}
-                                onPress={() => alert('Instant service feature coming soon!')}
+                                onPress={() => router.push(`/book-appointment?id=${doctor.id}`)}
                             >
                                 <Text style={styles.bookButtonText}>Get Instant Service</Text>
                             </TouchableOpacity>
@@ -316,82 +302,94 @@ const styles = StyleSheet.create({
         color: '#2D3748',
         fontWeight: '600',
     },
-    calendarSection: {
-        marginBottom: 24,
-    },
-    calendarHeader: {
+    statsSection: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 20,
+        marginBottom: 24,
+        gap: 12,
     },
-    calendarMonth: {
+    statCard: {
+        flex: 1,
+        backgroundColor: '#F7FAFC',
+        borderRadius: 12,
+        padding: 16,
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#E2E8F0',
+    },
+    statNumber: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#2D3748',
+        marginTop: 8,
+        marginBottom: 4,
+    },
+    statLabel: {
+        fontSize: 12,
+        color: '#718096',
+        textAlign: 'center',
+    },
+    reviewsSection: {
+        backgroundColor: '#F7FAFC',
+        borderRadius: 12,
+        padding: 16,
+        marginBottom: 24,
+        borderWidth: 1,
+        borderColor: '#E2E8F0',
+    },
+    reviewsTitle: {
         fontSize: 16,
         fontWeight: '600',
         color: '#2D3748',
+        marginBottom: 12,
     },
-    weekDaysContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        marginBottom: 16,
-    },
-    weekDay: {
-        fontSize: 13,
-        color: '#2D3748',
-        fontWeight: '500',
-        width: 40,
-        textAlign: 'center',
-    },
-    weekDaySaturday: {
-        color: '#FF8C42',
-    },
-    datesContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-    },
-    dateButton: {
-        width: 40,
-        height: 40,
-        borderRadius: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F7FAFC',
-    },
-    dateButtonSelected: {
-        backgroundColor: '#FF8C42',
-    },
-    dateText: {
-        fontSize: 14,
-        color: '#718096',
-        fontWeight: '500',
-    },
-    dateTextSelected: {
-        color: '#FFFFFF',
-        fontWeight: '600',
-    },
-    timeSlotsContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 32,
+    reviewsSummary: {
         gap: 8,
     },
-    timeSlot: {
-        flex: 1,
-        paddingVertical: 12,
-        borderRadius: 8,
-        backgroundColor: '#F7FAFC',
+    ratingRow: {
+        flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 8,
     },
-    timeSlotSelected: {
-        backgroundColor: '#FF8C42',
+    starsRow: {
+        flexDirection: 'row',
+        gap: 4,
     },
-    timeSlotText: {
+    ratingText: {
         fontSize: 14,
-        color: '#2D3748',
         fontWeight: '600',
+        color: '#2D3748',
     },
-    timeSlotTextSelected: {
-        color: '#FFFFFF',
+    reviewsCount: {
+        fontSize: 13,
+        color: '#718096',
+    },
+    consultationInfo: {
+        backgroundColor: '#F7FAFC',
+        borderRadius: 12,
+        padding: 16,
+        marginBottom: 24,
+        borderWidth: 1,
+        borderColor: '#E2E8F0',
+    },
+    infoRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 12,
+        gap: 12,
+        borderBottomWidth: 1,
+        borderBottomColor: '#E2E8F0',
+    },
+    infoLabel: {
+        flex: 1,
+        fontSize: 14,
+        color: '#718096',
+    },
+    infoValue: {
+        fontSize: 14,
+        fontWeight: '600',
+        color: '#2D3748',
     },
     instantServiceSection: {
         alignItems: 'center',

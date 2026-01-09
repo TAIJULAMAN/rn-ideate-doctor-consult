@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, TextInput } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, TextInput, Modal } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { doctors } from '../data/doctors';
@@ -15,6 +15,7 @@ export default function Payment() {
     const [expiryDate, setExpiryDate] = useState('');
     const [cvv, setCvv] = useState('');
     const [isProcessing, setIsProcessing] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     if (!doctor) {
         return (
@@ -45,9 +46,13 @@ export default function Payment() {
         // Simulate payment processing
         setTimeout(() => {
             setIsProcessing(false);
-            alert('Payment Successful! Your appointment has been booked.');
-            router.push('/');
+            setShowSuccessModal(true);
         }, 2000);
+    };
+
+    const handleCloseModal = () => {
+        setShowSuccessModal(false);
+        router.push('/');
     };
 
     return (
@@ -206,6 +211,69 @@ export default function Payment() {
 
                 <View style={styles.bottomSpacer} />
             </ScrollView>
+
+            <Modal
+                visible={showSuccessModal}
+                transparent={true}
+                animationType="fade"
+                onRequestClose={handleCloseModal}
+            >
+                <View style={styles.modalOverlay}>
+                    <View style={styles.modalContent}>
+                        <View style={styles.successIconContainer}>
+                            <View style={styles.successIconCircle}>
+                                <Ionicons name="checkmark" size={48} color="#FFFFFF" />
+                            </View>
+                        </View>
+
+                        <Text style={styles.successTitle}>Payment Successful!</Text>
+                        <Text style={styles.successMessage}>
+                            Your appointment has been confirmed
+                        </Text>
+
+                        <View style={styles.bookingDetailsCard}>
+                            <View style={styles.bookingDetailRow}>
+                                <Ionicons name="person-outline" size={20} color="#718096" />
+                                <Text style={styles.bookingDetailLabel}>Doctor</Text>
+                                <Text style={styles.bookingDetailValue}>{doctor?.name}</Text>
+                            </View>
+                            <View style={styles.bookingDetailRow}>
+                                <Ionicons name="calendar-outline" size={20} color="#718096" />
+                                <Text style={styles.bookingDetailLabel}>Date</Text>
+                                <Text style={styles.bookingDetailValue}>{date}</Text>
+                            </View>
+                            <View style={styles.bookingDetailRow}>
+                                <Ionicons name="time-outline" size={20} color="#718096" />
+                                <Text style={styles.bookingDetailLabel}>Time</Text>
+                                <Text style={styles.bookingDetailValue}>{time}</Text>
+                            </View>
+                            <View style={styles.bookingDetailRow}>
+                                <Ionicons name="cash-outline" size={20} color="#718096" />
+                                <Text style={styles.bookingDetailLabel}>Amount</Text>
+                                <Text style={styles.bookingDetailValue}>${totalAmount}.00</Text>
+                            </View>
+                        </View>
+
+                        <Text style={styles.confirmationNote}>
+                            A confirmation email has been sent to {patientEmail}
+                        </Text>
+
+                        <TouchableOpacity style={styles.modalButton} onPress={handleCloseModal}>
+                            <Text style={styles.modalButtonText}>Done</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={styles.viewAppointmentButton}
+                            onPress={() => {
+                                setShowSuccessModal(false);
+                                router.push('/');
+                            }}
+                        >
+                            <Text style={styles.viewAppointmentText}>View My Appointments</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 }
@@ -415,5 +483,103 @@ const styles = StyleSheet.create({
     },
     bottomSpacer: {
         height: 40,
+    },
+    modalOverlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20,
+    },
+    modalContent: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: 20,
+        padding: 32,
+        width: '100%',
+        maxWidth: 400,
+        alignItems: 'center',
+    },
+    successIconContainer: {
+        marginBottom: 24,
+    },
+    successIconCircle: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        backgroundColor: '#48BB78',
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: '#48BB78',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+        elevation: 8,
+    },
+    successTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#2D3748',
+        marginBottom: 8,
+        textAlign: 'center',
+    },
+    successMessage: {
+        fontSize: 15,
+        color: '#718096',
+        textAlign: 'center',
+        marginBottom: 24,
+    },
+    bookingDetailsCard: {
+        width: '100%',
+        backgroundColor: '#F7FAFC',
+        borderRadius: 12,
+        padding: 16,
+        marginBottom: 20,
+    },
+    bookingDetailRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 10,
+        gap: 12,
+    },
+    bookingDetailLabel: {
+        fontSize: 14,
+        color: '#718096',
+        flex: 1,
+    },
+    bookingDetailValue: {
+        fontSize: 14,
+        color: '#2D3748',
+        fontWeight: '600',
+        flex: 2,
+        textAlign: 'right',
+    },
+    confirmationNote: {
+        fontSize: 13,
+        color: '#718096',
+        textAlign: 'center',
+        marginBottom: 24,
+        lineHeight: 18,
+    },
+    modalButton: {
+        backgroundColor: '#FF8C42',
+        paddingVertical: 14,
+        paddingHorizontal: 48,
+        borderRadius: 12,
+        width: '100%',
+        alignItems: 'center',
+        marginBottom: 12,
+    },
+    modalButtonText: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#FFFFFF',
+    },
+    viewAppointmentButton: {
+        paddingVertical: 12,
+    },
+    viewAppointmentText: {
+        fontSize: 15,
+        color: '#FF8C42',
+        fontWeight: '600',
     },
 });
