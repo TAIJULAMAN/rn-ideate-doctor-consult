@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, TextInput } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { doctors } from '../data/doctors';
+import { doctors } from '../../../data/doctors';
 
 export default function Checkout() {
     const router = useRouter();
@@ -308,3 +308,5 @@ const styles = StyleSheet.create({
         height: 40,
     },
 });
+
+

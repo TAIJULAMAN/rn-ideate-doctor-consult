@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { chatMessages } from '../data/messages';
+import { chatMessages } from '../../../data/messages';
 
 export default function ChatDetail() {
     const router = useRouter();
@@ -19,13 +19,13 @@ export default function ChatDetail() {
                 <View style={styles.headerActions}>
                     <TouchableOpacity
                         style={styles.headerButton}
-                        onPress={() => router.push('/audio-call')}
+                        onPress={() => router.push('/components/messaging/audio-call' as any)}
                     >
                         <Ionicons name="call" size={22} color="#4A90E2" />
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.headerButton}
-                        onPress={() => router.push('/video-call')}
+                        onPress={() => router.push('/components/messaging/video-call' as any)}
                     >
                         <Ionicons name="videocam" size={22} color="#4A90E2" />
                     </TouchableOpacity>
@@ -75,7 +75,7 @@ export default function ChatDetail() {
                             </View>
 
                             {msg.senderId === 'user' && (
-                                <Image source={require('../assets/message/m1.png')} style={styles.messageAvatar} />
+                                <Image source={require('../../../assets/message/m1.png')} style={styles.messageAvatar} />
                             )}
                         </View>
                     </View>
@@ -223,3 +223,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
+
+
+
